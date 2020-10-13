@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/overview/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/console/create-domain/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/overview/s3/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/infra-as-code/overview/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/overview/cloudfront/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/console/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/console/get-cert/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/infra-as-code/details/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/infra-as-code/</loc>
+    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/console/create-bucket/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/infra-as-code/deploy/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/overview/security/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/overview/all-together/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/console/setup-cloudfront/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/console/update-bucket-policy/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/console/update-dns/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/</loc>
+    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/credits/</loc>
+  </url>
+  
+  <url>
+    <loc>https://gremlins.io/walkthroughs/static-site/tags/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,141 @@
+[
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/overview/",
+	"title": "Architecture Overview",
+	"tags": [],
+	"description": "",
+	"content": "If you have a website, application, or another web resource, you probably have static content. Static content includes files like images, videos, or music, or even scripts like .css or js. In the pre-cloud era, you would put those files on a standard server, and then serve them on the internet to all of your viewers, across the globe, from one specific geo location. But with cloud services, there’s a solution that provides faster delivery and better scalability.\nTo store, secure, and deliver static content at scale with AWS we will use S3 and CloudFront\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/console/create-domain/",
+	"title": "Create a Domain",
+	"tags": [],
+	"description": "",
+	"content": "Route 53 To register a new domain using Route 53\n Sign in to the AWS Management Console and open the Route 53 console at https://console.aws.amazon.com/route53/.    If you\u0026rsquo;re new to Route 53, choose Get started.\n  If you\u0026rsquo;re already using Route 53, in the navigation pane, choose Registered domains.\n  Choose Register domain, and specify the domain that you want to register:    Enter the domain name that you want to register, and choose Check to find out whether the domain name is available.\n  If the domain is available, choose Add to cart. The domain name appears in your shopping cart.\n  Choose Continue.\n  On the Contact Details for Your n Domains page, enter contact information for the domain registrant, administrator, and technical contacts. The values that you enter here are applied to all of the domains that you\u0026rsquo;re registering.  Choose Continue.\nIf the registry requires verification and if it\u0026rsquo;s possible to verify the address during domain registration, the console displays a Verify the Email Address for the Registrant Contact section\n Review the information that you entered   Choose whether you want us to automatically renew your domain registration before the expiration date. read the terms of service, and select the check box to confirm that you\u0026rsquo;ve read the terms of service. Choose Complete Purchase.  A confirmation email will be sent from noreply@registrar.amazon.com. The registrant contact must follow the instructions in the email to confirm that the email was received, or AWS will suspend the domain as required by ICANN. When a domain is suspended, it\u0026rsquo;s not accessible on the internet. A hosted zone for the new domain is automatically created for you once the domain is created.\n "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/overview/s3/",
+	"title": "S3",
+	"tags": [],
+	"description": "",
+	"content": "The first step is to store your content in a secure and scalable way. A simple and flexible approach for static content that you want to make available on the internet is to store it in an Amazon S3 “bucket.” S3 is easy to set up and use, and is designed to store and retrieve any number of files or objects from anywhere on the internet. It’s simple to use and offers durable, highly available, and scalable data storage at low cost.\nWhen you put your content in an S3 bucket in the cloud, a lot of things become much easier. First, you don’t need to plan for and allocate a specific amount of storage space because S3 buckets scale automatically. In addition, because S3 is a serverless service, you don’t need to manage or patch servers that store files yourself; you just put and get your content. Finally, even if you require a server for your application (for example, because you have a dynamic application), the server can be smaller because it doesn’t have to handle requests for static content.\nHowever, lets take a look at the scenario shown in the following illustration. We’ve stored our content in an S3 bucket located in a region in Europe, and we have users located around the world who access that content. As the arrows show, whenever a user requests content, the request must go over the public internet to the source location–the S3 bucket in Europe. Depending on the user’s location, this can take a long time. The delays might even cause some user requests to bounce and return an error from the page.\nThis is where Cloudfront comes in\u0026hellip;\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/infra-as-code/overview/",
+	"title": "Solution Overview",
+	"tags": [],
+	"description": "",
+	"content": " The viewer requests the website at www.example.com. If the requested object is cached, CloudFront returns the object from its cache to the viewer. If the object is not in CloudFront’s cache, CloudFront requests the object from the origin (an S3 bucket). S3 returns the object to CloudFront, which triggers the Lambda@Edge origin response event. The object, including the security headers added by the Lambda@Edge function, is added to CloudFront’s cache. (Not shown) The objects is returned to the viewer. Subsequent responses for the object are served from the CloudFront cache.  "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/overview/cloudfront/",
+	"title": "Cloudfront",
+	"tags": [],
+	"description": "",
+	"content": "Storing your static content with S3 provides a lot of advantages. But to help optimize your application’s performance and security while effectively managing cost, you can also set up Amazon CloudFront to work with your S3 bucket to serve and protect the content. CloudFront is a content delivery network (CDN) service that delivers static and dynamic web content, video streams, and APIs around the world, securely and at scale. By design, delivering data out of CloudFront can be more cost effective than delivering it from S3 directly to your users.\nCloudFront serves content through a worldwide network of data centers called Edge Locations. Using edge servers to cache and serve content improves performance by providing content closer to where viewers are located. CloudFront has edge servers in locations all around the world, as you can see from the following map:\nWhen a user requests content that you serve with CloudFront, their request is routed to a nearby Edge Location. If CloudFront has a cached copy of the requested file, CloudFront delivers it to the user, providing a fast (low-latency) response. If the file they’ve requested isn’t yet cached, CloudFront retrieves it from your origin – for example, the S3 bucket where you’ve stored your content. Then, for the next local request for the same content, it’s already cached nearby and can be served immediately.\nBy caching your content in Edge Locations, CloudFront reduces the load on your S3 bucket and helps ensure a faster response for your users when they request content.\nIn the following illustration, you can see that there are no longer requests traversing the globe to get to our content hosted in an S3 bucket. Instead, requests are routed to the “least latent” Edge Location; that is, the closest in terms of delivery speed. CloudFront then serves cached content quickly and directly to the requesting user nearby, as shown with the green arrows. If the content is not yet cached with an edge server, CloudFront retrieves it from the S3 bucket origin. And because the content traverses the AWS private network instead of the public internet and CloudFront optimizes the TCP handshake, the request and content return is still much faster than access across the public internet.\nBut how do we secure our content?\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/console/",
+	"title": "Create in the Console",
+	"tags": [],
+	"description": "",
+	"content": "Chapter 2 Creating the infrastructure using the console In this section we\u0026rsquo;ll use the AWS console to create and configure the infrastructure required to host a static site.\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/console/get-cert/",
+	"title": "Get SSL Cert",
+	"tags": [],
+	"description": "",
+	"content": "ACM To enable SSL on our site we need to get a certificate for the domain. Handily for domains registered through route53 we can use ACM to create the required cert.\n Sign in to the AWS Management Console and open the Route 53 console at https://console.aws.amazon.com/acm/.   Click Register Certificate Request a public cert  Specify the domain names for the cert   Add all subdomains required to the cert. For example domain.com, www.domain.com, *.domain.com.  For a root domain like www.domain.com you will need both domain.com and www.domain.com on the cert.\n Validate you own the domain   Choose how you wish to validate the domain. The easiest option is to use DNS validation. With this approach you need to add some DNS values to your route53 hosted zone.  Add tags to the cert  Review the cert details  Validate the domain   We chose earlier to validate the domain using the DNS method This is made super easy in the console as we are using route53. Expand each subdomain Click Create record in Route 53 The records are added for you  Alternatively you can go into the hosted zone in Route53 and add the CNAME values yourself.\n Wait for AWS to validate domain and issue the cert   This can take up to 24 hours but normally happens in a couple of minutes. Once completed the status wil be set to issued.  "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/infra-as-code/details/",
+	"title": "Solution Details",
+	"tags": [],
+	"description": "",
+	"content": "S3 configuration This solution creates an S3 bucket that hosts your static website’s assets. The website is only accessible via CloudFront, not directly from S3.\nCloudFront configuration This solution creates a CloudFront distribution to serve your website to viewers. The distribution is configured with a CloudFront origin access identity to make sure that the website is only accessible via CloudFront, not directly from S3. The distribution is also configured with a Lambda@Edge function that adds security headers to every response.\nACM configuration This solution creates an SSL/TLS certificate in ACM, and attaches it to the CloudFront distribution. This enables the distribution to serve your domain’s website using HTTPS.\nLambda@Edge configuration This solution creates a Lambda@Edge function that’s triggered on an origin response event. The function adds security headers to every response served by CloudFront.\nThe security headers can help mitigate some attacks, as explained in this blog post: Adding HTTP Security Headers Using Lambda@Edge and Amazon CloudFront. Security headers are a group of headers in the web server response that tell web browsers to take extra security precautions. This solution adds the following headers to each response:\n Strict-Transport-Security Content-Security-Policy X-Content-Type-Options X-Frame-Options X-XSS-Protection Referrer-Policy  For more information, see Mozilla’s web security guidelines.\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/infra-as-code/",
+	"title": "Infrastructure as Code",
+	"tags": [],
+	"description": "",
+	"content": "Now we\u0026rsquo;ve walked though the architecture behind hosting a static website on AWS and manually created it via the console, it\u0026rsquo;s time to write out the infrastructure as code.\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/console/create-bucket/",
+	"title": "Create Bucket",
+	"tags": [],
+	"description": "",
+	"content": "S3  Sign in to the AWS Management Console and open the S3 console at https://console.aws.amazon.com/s3/.  For S3 and Cloudfront there is slightly different configuration depending if the site is a SPA or a traditional layered website with a nested folder setup.\n Single Page App Very easy setup here. Create a new bucket and call it your domain name (note you can call the bucket anything really for an SPA but for consistency I find it good to use a common naming approach as with regular websites)  Traditional layered Site Create a new bucket and call it your domain name.   For static sites hosted in S3, to be used with cloudfront, the bucket name must match the domain name of the static site.  Allow public access to the bucket   Got to Permissions Block public access Uncheck the block all public access checkbox and save  Turn on static website hosting   Go to properties Static website hosting Select Use this bucket to host a website  We do need to set bucket policies to decide who can have access to our buckets contents. We will come back to this after setting up our cloudfront distribution.\n "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/infra-as-code/deploy/",
+	"title": "Deploy Stack",
+	"tags": [],
+	"description": "",
+	"content": "To deploy the solution using the CloudFormation console\n  Click the Launch on AWS button to open the solution in the CloudFormation console.\n\n  If necessary, sign in with your AWS account credentials.\n  You should see a Create stack page, with pre-populated fields that specify the CloudFormation template. Choose the Next button at the bottom of the page.\n  On the Specify stack details page, enter values for the following fields:\n SubDomain: The subdomain for your registered domain name. Viewers use the subdomain to access your website, for example: www.example.com. We recommend using the default value of www as the subdomain. DomainName: Your registered domain name, such as example.com. This domain must be pointed to a Route 53 hosted zone.  After entering values, choose the Next button.\n  On the Configure stack options page, you can optionally add tags and other stack options. When finished, choose the Next button.\n  On the Review page, you must scroll down and check the two boxes in the Capabilities section:\n I acknowledge that AWS CloudFormation might create IAM resources with custom names. I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND  These capabilities allow CloudFormation to create an IAM role that allows access to the stack’s resources, and to name the resources dynamically.\n  Choose the Create stack button.\n  Wait for the CloudFormation stack to launch. The stack launches some nested stacks, and can take several minutes to finish. When it’s launched, the Status changes to CREATE_COMPLETE.\n  After the stack is launched, go to www.example.com to view your website (replace example.com with your domain name). You should see the website’s default content:\n  "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/overview/security/",
+	"title": "Security",
+	"tags": [],
+	"description": "",
+	"content": "Often, companies that distribute content over the internet want to restrict access to documents, business data, media streams, or other content so that only selected users, like paying customers, can request it. By using CloudFront, we can set up additional access restrictions like geo-restrictions, signed URLs, and signed cookies, to further constrain access to the content following different criteria.\nAnother security feature of CloudFront is Origin Access Identity (OAI), which restricts access to an S3 bucket and its content to only CloudFront and operations it performs. The CloudFormation template in final section of this walkthrough includes OAI to help ensure that your content is protected and restricted.\nCloudFront includes additional protection against malicious exploits. To provide these safeguards, CloudFront integrates with both AWS WAF, a web application firewall that helps protect web applications from common web exploits, and AWS Shield, a managed DDoS protection service for web applications running on AWS. AWS WAF lets you control access to your content, based on conditions that you specify, such as IP addresses or the query string value on a content request. CloudFront then responds with either the requested content, if the conditions are met, or with an HTTP 403 status code (Forbidden). All CloudFront customers benefit from the automatic protection of AWS Shield Standard, at no additional charge. But customers who want deeper insights, enhanced mitigations, and cost protections against DDoS attacks can use AWS Shield Advanced.\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/overview/all-together/",
+	"title": "Putting it all together",
+	"tags": [],
+	"description": "",
+	"content": "So what exactly are we going to build with this architecture.\n We will use S3 to host all our website artifacts. We will use ACM to generate an SSL cert for our domain. We will create a cloudfront distribution which will read and cache content from our S3 bucket. We will use route53 to route requests to our domain to our Cloudfront distribution.  For the infrastructure as code section, all code can be found in this github repo.\nA detailed walkthrough of each AWS service used, and how it is configured can be found in the Create in the Console section.\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/console/setup-cloudfront/",
+	"title": "Setup CF Distribution",
+	"tags": [],
+	"description": "",
+	"content": "Cloudfront   Sign in to the AWS Management Console and open the S3 console at https://console.aws.amazon.com/cloudfront/.\n  Specify a delivery method\n   We require a web distribution for our static site  RTMP is being deprecated at the end of the year so web will be the only optino going forward.\n Configure the Origin Settings   Origin Domain Name: The first setting is the Origin Domain Name. Given that this is an origin, where the content will originate, we want to use the S3 bucket we created above. You should see it in the list as an available option. Origin Path: Unless you have your project inside a folder in your bucket, you will not need to specify an Origin Path as this is identifying if CloudFront needs to point to a specific folder within the bucket.  For S3 and Cloudfront there is slightly different configuration depending if the site is a SPA or a traditional layered website with a nested folder setup. In cloudfront this is primarily around the Origin Access Identity.\n Single Page App   Restrict Bucket Access: We want to protect the S3 bucket, so we will restrict bucket access. Select Yes for this option.\n  Origin Access Identity: If you are following this guide, I am assuming you have no Access Identity setup for this already. Select Create a New Identity and keep the default name (Comment) or rename to make sense for your use. I have never had to rename this in my cases but to each their own.\n  Grant Read Permissions on Bucket: To apply the new Access Identify permissions to the S3 bucket, you will want to select Yes, Update Bucket Policy. I will show you how to verify this later in this guide.\n  Traditional layered Site For sites setup as static hosting on S3 we need to use a custom origin. For CloudFront to get your files from a custom origin, the files must be publicly accessible and we can\u0026rsquo;t use OAIs. It is possible to restrict access to the buckets using custom headers. This is more specialized so for the purpose of this walkthrough we won\u0026rsquo;t use them. (Supplemental section to be added in the future to walk through this process).\n Origin Domain Name: The first setting is the Origin Domain Name. For our traditional layered site we want to use the static website hosting endpoint specified in the S3 bucket configuration.  Configure behavior settings    Viewer Protocol Policy: You should select Redirect HTTP to HTTPS.\n  Allowed HTTP Methods: The default setting (GET, HEAD) will work for most static sites.\n  Compress Objects Automatically: You should select Yes to compress objects automatically. This will make the files transmitted smaller thus saving you money.\n  Configure distribution settings    Alternate Domain Names (CNAMEs): This is where you enter the URL for your project. You can have multiple URLs for CNAMES here but if you used an SSL cert or created one with Certificate Manager, then these URLs should be included on the SSL cert.\n  SSL Certificate: Select your SSL cert from the drop down.Remember, it is important that the SSL cert contains all the URLs used in the setting above.\n  Default Root Object: This is typically the index.html file but sometimes the project may use another.\n  For the Default Root Object. This is typically the index.html file but for sites with S3 configured for static hosting we leave this blank.\n When ready hit Create Distribution  Wait for distribution to be deployed.  Error Page Redirection Note to avoid your users getting a NoKeyFound error page when they try and access something on the site that doesn\u0026rsquo;t exist we need to configure our 404 error page on cloudfront. This can either be a custom page or in the case of an SPA redirect back to index.html. We will run through the SPA use case here.\n With the distribution created, click on the ID of the distribution to get back into the settings. You should see multiple tabs and one of them being Error Pages. Click on Error Pages and then click on Create Custom Error Response.  From here, you need to setup a redirect for 404 handling to ensure your SPA works properly.    HTTP Error Code: You want to customize the 404: Not Found HTTP error code.\n  Error Caching Minimum TTL (seconds): This is the time-to-live (TTL) which is how long the request will remain cached. For dev, I use a 0 value and for production I personally use a 300 value (5 mins).\n  Customize Error Response: You will want to set this to Yes, so you can customize the response.\n  Response Page Path: You will want to redirect the 404 error back to you SPA so you will want to enter /index.html or if your SPA uses something else, enter that here.\n  HTTP Response Code: You want to return a 200: OK for the response since this is a SPA.\n  "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/console/update-bucket-policy/",
+	"title": "Update Bucket Policy",
+	"tags": [],
+	"description": "",
+	"content": "S3  Sign in to the AWS Management Console and open the S3 console at https://console.aws.amazon.com/s3/.   Go to Permissions Go to Bucket Policy  For S3 and Cloudfront there is slightly different configuration depending if you are using Origin Access Identifiers on a private bucket or are using the S3 static hosting feature on a public bucket.\n Single Page App If you walked through the previous CloudFront distibution setup and selected it to update the bucket policy you will have a policy that looks something like this  { \u0026#39;Version\u0026#39;: \u0026#39;2008-10-17\u0026#39;, \u0026#39;Id\u0026#39;: \u0026#39;PolicyForCloudFrontPrivateContent\u0026#39;, \u0026#39;Statement\u0026#39;: [ { \u0026#39;Sid\u0026#39;: \u0026#39;1\u0026#39;, \u0026#39;Effect\u0026#39;: \u0026#39;Allow\u0026#39;, \u0026#39;Principal\u0026#39;: { \u0026#39;AWS\u0026#39;: \u0026#39;arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ORIGIN_ACCESS_ID\u0026#39;, }, \u0026#39;Action\u0026#39;: \u0026#39;s3:GetObject\u0026#39;, \u0026#39;Resource\u0026#39;: \u0026#39;arn:aws:s3:::BUCKET_NAME/*\u0026#39;, }, ], } The problem here is if an object does not exist in the bucket, even with the 404 error page redirect, you will see the error NoSuchKey. This is common for endpoints like /about. This is actually a known issue and is clearly defined in the knowledge center. The fix is very simple but unless you understand how these policies work, you will miss this. You need to add the action s3:ListBucket. This sounds easy enough but what gets most people is that this works on a different resource than the s3:GetObject so simply adding the action will not work.\nTo fix this, update your policy to:\n{ \u0026#39;Version\u0026#39;: \u0026#39;2008-10-17\u0026#39;, \u0026#39;Statement\u0026#39;: [ { \u0026#39;Sid\u0026#39;: \u0026#39;AllowCloudFrontOriginAccess\u0026#39;, \u0026#39;Effect\u0026#39;: \u0026#39;Allow\u0026#39;, \u0026#39;Principal\u0026#39;: { \u0026#39;AWS\u0026#39;: \u0026#39;arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ORIGIN_ACCESS_ID\u0026#39;, }, \u0026#39;Action\u0026#39;: [\u0026#39;s3:GetObject\u0026#39;, \u0026#39;s3:ListBucket\u0026#39;], \u0026#39;Resource\u0026#39;: [\u0026#39;arn:aws:s3:::BUCKET_NAME\u0026#39;, \u0026#39;arn:aws:s3:::BUCKET_NAME/*\u0026#39;], }, ], } S3 Hosted Site Make sure that public read is allowed on objects in the bucket.  "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/console/update-dns/",
+	"title": "Update DNS entries",
+	"tags": [],
+	"description": "",
+	"content": "Route53 Finally we need to update the DNS records to point the domain name to the Cloudfront distribution.\n Sign in to the AWS Management Console and open the S3 console at https://console.aws.amazon.com/route53/.   Click on Hosted Zones Select your sites domain. Click on Create Record Set  We need to create our IPV4 record sets  We need to setup 2 record sets. One for www.yourdomain.com and a second for yourdomain.com\n  Name: www Type: A- IPv4 address Alias: Yes Alias Target: Select the Cloudfront distribution we created earlier Click Create  Repeat for the non www root domain\n Name: {leave blank} Type: A- IPv4 address Alias: Yes Alias Target: Select the Cloudfront distribution we created earlier Click Create  We need to create our IPV6 record sets  We need to setup 2 record sets. One for www.yourdomain.com and a second for yourdomain.com\n  Name: www Type: AAAA - IPv6 address Alias: Yes Alias Target: Select the Cloudfront distribution we created earlier Click Create  Repeat for the non www root domain\n Name: {leave blank} Type: AAAA - IPv6 address Alias: Yes Alias Target: Select the Cloudfront distribution we created earlier Click Create  Note it can take anywhere from a few seconds to 24 hours for the DNS updates to propogate.\n "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/",
+	"title": "Static Site on AWS",
+	"tags": [],
+	"description": "",
+	"content": "Static Sites This dynamic architecture walkthrough steps through how to host an SSL static site on AWS without having to maintain any servers.\nWe will first step through each AWS service used and how to configure them manually through the console, explaining what each piece does.\nFinally there will be a set of Cloudformation templates provided to automate creating something similar to below.\n"
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/credits/",
+	"title": "Credits",
+	"tags": [],
+	"description": "",
+	"content": "This site is built on top of the Hugo Learn Theme.\nContributors Thanks to them for making Open Source Software a better place !\nAnd a special thanks to @vjeantet for his work on docdock, a fork of hugo-theme-learn. v2.0.0 of this theme is inspired by his work.\nPackages and libraries  mermaid - generation of diagram and flowchart from text in a similar manner as markdown font awesome - the iconic font and CSS framework jQuery - The Write Less, Do More, JavaScript Library lunr - Lunr enables you to provide a great search experience without the need for external, server-side, search services\u0026hellip; horsey - Progressive and customizable autocomplete component clipboard.js - copy text to clipboard highlight.js - Javascript syntax highlighter modernizr - A JavaScript toolkit that allows web developers to use new CSS3 and HTML5 features while maintaining a fine level of control over browsers that don\u0026rsquo;t support  Tooling  Hugo  "
+},
+{
+	"uri": "https://gremlins.io/walkthroughs/static-site/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
