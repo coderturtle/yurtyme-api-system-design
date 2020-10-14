@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Potential AWS Implementation on Yurtyme System Design 2020</title>
-    <link>https://coderturtle.github.io/yurtyme-api-system-design/2020/aws-design/</link>
+    <link>https://coderturtle.github.io/yurtyme-api-system-design/pages/2020/aws-design/</link>
     <description>Recent content in Potential AWS Implementation on Yurtyme System Design 2020</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language><atom:link href="https://coderturtle.github.io/yurtyme-api-system-design/2020/aws-design/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-US</language><atom:link href="https://coderturtle.github.io/yurtyme-api-system-design/pages/2020/aws-design/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
