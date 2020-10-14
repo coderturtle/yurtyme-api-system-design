@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="description" content="Dynamic architecture walkthrough of hosting a static site on AWS">
+<meta name="author" content="Derm Duncan">
+
+    <link rel="icon" href="/walkthroughs/static-site/images/favicon.png" type="image/png">
+
+    <title>Setup CF Distribution :: Static Site on AWS</title>
+
+    
+    <link href="/walkthroughs/static-site/css/nucleus.css?1601919098" rel="stylesheet">
+    <link href="/walkthroughs/static-site/css/fontawesome-all.min.css?1601919098" rel="stylesheet">
+    <link href="/walkthroughs/static-site/css/hybrid.css?1601919098" rel="stylesheet">
+    <link href="/walkthroughs/static-site/css/featherlight.min.css?1601919098" rel="stylesheet">
+    <link href="/walkthroughs/static-site/css/perfect-scrollbar.min.css?1601919098" rel="stylesheet">
+    <link href="/walkthroughs/static-site/css/auto-complete.css?1601919098" rel="stylesheet">
+    <link href="/walkthroughs/static-site/css/atom-one-dark-reasonable.css?1601919098" rel="stylesheet">
+    <link href="/walkthroughs/static-site/css/theme.css?1601919098" rel="stylesheet">
+    <link href="/walkthroughs/static-site/css/hugo-theme.css?1601919098" rel="stylesheet">
+    
+    <link href="/walkthroughs/static-site/css/theme-blue.css?1601919098" rel="stylesheet">
+    
+    
+
+    <script src="/walkthroughs/static-site/js/jquery-3.3.1.min.js?1601919098"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/walkthroughs/static-site/console/setup-cloudfront/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+  <img src="images/cloud-gremlin-blue.png" />
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/walkthroughs/static-site/js/lunr.min.js?1601919098"></script>
+<script type="text/javascript" src="/walkthroughs/static-site/js/auto-complete.js?1601919098"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/gremlins.io\/walkthroughs\/static-site";
+    
+</script>
+<script type="text/javascript" src="/walkthroughs/static-site/js/search.js?1601919098"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/overview/" title="Architecture Overview" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/overview/">
+          <b>1. </b>Architecture Overview
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/overview/s3/" title="S3" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/overview/s3/">
+          <b>a. </b>S3
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/overview/cloudfront/" title="Cloudfront" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/overview/cloudfront/">
+          <b>b. </b>Cloudfront
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/overview/security/" title="Security" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/overview/security/">
+          <b>c. </b>Security
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/overview/all-together/" title="Putting it all together" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/overview/all-together/">
+          <b>d. </b>Putting it all together
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/console/" title="Create in the Console" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/console/">
+          <b>2. </b>Create in the Console
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/console/create-domain/" title="Create a Domain" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/console/create-domain/">
+          <b>a. </b>Create a Domain
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/console/get-cert/" title="Get SSL Cert" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/console/get-cert/">
+          <b>b. </b>Get SSL Cert
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/console/create-bucket/" title="Create Bucket" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/console/create-bucket/">
+          <b>c. </b>Create Bucket
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/console/setup-cloudfront/" title="Setup CF Distribution" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="/walkthroughs/static-site/console/setup-cloudfront/">
+          <b>d. </b>Setup CF Distribution
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/console/update-bucket-policy/" title="Update Bucket Policy" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/console/update-bucket-policy/">
+          <b>e. </b>Update Bucket Policy
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/console/update-dns/" title="Update DNS entries" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/console/update-dns/">
+          <b>f. </b>Update DNS entries
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/infra-as-code/" title="Infrastructure as Code" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/infra-as-code/">
+          <b>3. </b>Infrastructure as Code
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/infra-as-code/overview/" title="Solution Overview" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/infra-as-code/overview/">
+          <b>a. </b>Solution Overview
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/infra-as-code/details/" title="Solution Details" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/infra-as-code/details/">
+          <b>b. </b>Solution Details
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/walkthroughs/static-site/infra-as-code/deploy/" title="Deploy Stack" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/walkthroughs/static-site/infra-as-code/deploy/">
+          <b>c. </b>Deploy Stack
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://github.com/coderturtle/gremlindojo/static-site"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://gremlins.io/cloud-gremlin/"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://gohugo.io/"><i class='fas fa-fw fa-bookmark'></i> Hugo Documentation</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/coderturtle/gremlindojoconsole/setup-cloudfront/_index.en.md" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/walkthroughs/static-site/'>Static Site on AWS</a> > <a href='/walkthroughs/static-site/console/'>Create in the Console</a> > Setup CF Distribution
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#cloudfront">Cloudfront</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#error-page-redirection">Error Page Redirection</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Setup CF Distribution
+            </h1>
+          
+
+        
+
+
+
+	<h3 id="cloudfront">Cloudfront</h3>
+<ol>
+<li>
+<p>Sign in to the AWS Management Console and open the S3 console at <a href="https://console.aws.amazon.com/cloudfront/">https://console.aws.amazon.com/cloudfront/</a>.</p>
+</li>
+<li>
+<p>Specify a delivery method</p>
+</li>
+</ol>
+<ul>
+<li>We require a web distribution for our static site</li>
+</ul>
+
+<div class="notices note" ><p>RTMP is being deprecated at the end of the year so web will be the only optino going forward.</p>
+</div>
+
+<p><img src="images/cf-1.png?width=60pc" alt="Delivery Method"></p>
+<ol start="3">
+<li>Configure the Origin Settings</li>
+</ol>
+<ul>
+<li>Origin Domain Name:
+The first setting is the Origin Domain Name. Given that this is an origin, where the content will originate, we want to use the S3 bucket we created above. You should see it in the list as an available option.</li>
+<li>Origin Path:
+Unless you have your project inside a folder in your bucket, you will not need to specify an Origin Path as this is identifying if CloudFront needs to point to a specific folder within the bucket.</li>
+</ul>
+
+<div class="notices note" ><p>For S3 and Cloudfront there is slightly different configuration depending if the site is a SPA or a traditional layered website with a nested folder setup. In cloudfront this is primarily around the Origin Access Identity.</p>
+</div>
+
+<h1 id="single-page-app">Single Page App</h1>
+<ul>
+<li>
+<p>Restrict Bucket Access:
+We want to protect the S3 bucket, so we will restrict bucket access. Select Yes for this option.</p>
+</li>
+<li>
+<p>Origin Access Identity:
+If you are following this guide, I am assuming you have no Access Identity setup for this already. Select Create a New Identity and keep the default name (Comment) or rename to make sense for your use. I have never had to rename this in my cases but to each their own.</p>
+</li>
+<li>
+<p>Grant Read Permissions on Bucket:
+To apply the new Access Identify permissions to the S3 bucket, you will want to select Yes, Update Bucket Policy. I will show you how to verify this later in this guide.</p>
+</li>
+</ul>
+<p><img src="images/cf-2.png?width=60pc" alt="Origin Settings"></p>
+<h1 id="traditional-layered-site">Traditional layered Site</h1>
+<p>For sites setup as static hosting on S3 we need to use a custom origin. For CloudFront to get your files from a custom origin, the files must be publicly accessible and we can&rsquo;t use OAIs. It is possible to restrict access to the buckets using <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-overview.html#forward-custom-headers-restrict-access">custom headers</a>. This is more specialized so for the purpose of this walkthrough we won&rsquo;t use them. (Supplemental section to be added in the future to walk through this process).</p>
+<ul>
+<li>Origin Domain Name:
+The first setting is the Origin Domain Name. For our traditional layered site we want to use the static website hosting endpoint specified in the S3 bucket configuration.</li>
+</ul>
+<p><img src="images/s3_config.png?width=60pc" alt="S3 Config"></p>
+<p><img src="images/cf-origin-2.png?width=60pc" alt="Origin Settings"></p>
+<ol start="4">
+<li>Configure behavior settings</li>
+</ol>
+<ul>
+<li>
+<p>Viewer Protocol Policy:
+You should select Redirect HTTP to HTTPS.</p>
+</li>
+<li>
+<p>Allowed HTTP Methods:
+The default setting (GET, HEAD) will work for most static sites.</p>
+</li>
+<li>
+<p>Compress Objects Automatically:
+You should select Yes to compress objects automatically. This will make the files transmitted smaller thus saving you money.</p>
+</li>
+</ul>
+<p><img src="images/cf-3.png?width=60pc" alt="Behavior Settings"></p>
+<ol start="5">
+<li>Configure distribution settings</li>
+</ol>
+<ul>
+<li>
+<p>Alternate Domain Names (CNAMEs):
+This is where you enter the URL for your project. You can have multiple URLs for CNAMES here but if you used an SSL cert or created one with Certificate Manager, then these URLs should be included on the SSL cert.</p>
+</li>
+<li>
+<p>SSL Certificate:
+Select your SSL cert from the drop down.Remember, it is important that the SSL cert contains all the URLs used in the setting above.</p>
+</li>
+<li>
+<p>Default Root Object:
+This is typically the index.html file but sometimes the project may use another.</p>
+</li>
+</ul>
+<p><img src="images/cf-4.png?width=60pc" alt="Distribution Settings"></p>
+
+<div class="notices note" ><p>For the Default Root Object. This is typically the index.html file but for sites with S3 configured for static hosting we leave this blank.</p>
+</div>
+
+<p><img src="images/cf-5.png?width=60pc" alt="New bucket"></p>
+<ol start="6">
+<li>When ready hit Create Distribution</li>
+</ol>
+<p><img src="images/cf-6.png?width=60pc" alt="New bucket"></p>
+<ol start="7">
+<li>Wait for distribution to be deployed.</li>
+</ol>
+<p><img src="images/cf-7.png?width=60pc" alt="New bucket"></p>
+<h3 id="error-page-redirection">Error Page Redirection</h3>
+<p>Note to avoid your users getting a NoKeyFound error page when they try and access something on the site that doesn&rsquo;t exist we need to configure our 404 error page on cloudfront. This can either be a custom page or in the case of an SPA redirect back to index.html. We will run through the SPA use case here.</p>
+<ol>
+<li>With the distribution created, click on the ID of the distribution to get back into the settings. You should see multiple tabs and one of them being Error Pages. Click on Error Pages and then click on Create Custom Error Response.</li>
+</ol>
+<p><img src="images/cf-8.png?width=60pc" alt="New bucket"></p>
+<ol start="10">
+<li>From here, you need to setup a redirect for 404 handling to ensure your SPA works properly.</li>
+</ol>
+<ul>
+<li>
+<p>HTTP Error Code:
+You want to customize the 404: Not Found HTTP error code.</p>
+</li>
+<li>
+<p>Error Caching Minimum TTL (seconds):
+This is the time-to-live (TTL) which is how long the request will remain cached. For dev, I use a 0 value and for production I personally use a 300 value (5 mins).</p>
+</li>
+<li>
+<p>Customize Error Response:
+You will want to set this to Yes, so you can customize the response.</p>
+</li>
+<li>
+<p>Response Page Path:
+You will want to redirect the 404 error back to you SPA so you will want to enter /index.html or if your SPA uses something else, enter that here.</p>
+</li>
+<li>
+<p>HTTP Response Code:
+You want to return a 200: OK for the response since this is a SPA.</p>
+</li>
+</ul>
+<p><img src="images/cf-9.png?width=60pc" alt="New bucket"></p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/walkthroughs/static-site/console/create-bucket/" title="Create Bucket"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/walkthroughs/static-site/console/update-bucket-policy/" title="Update Bucket Policy" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/walkthroughs/static-site/js/clipboard.min.js?1601919098"></script>
+    <script src="/walkthroughs/static-site/js/perfect-scrollbar.min.js?1601919098"></script>
+    <script src="/walkthroughs/static-site/js/perfect-scrollbar.jquery.min.js?1601919098"></script>
+    <script src="/walkthroughs/static-site/js/jquery.sticky.js?1601919098"></script>
+    <script src="/walkthroughs/static-site/js/featherlight.min.js?1601919098"></script>
+    <script src="/walkthroughs/static-site/js/highlight.pack.js?1601919098"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/walkthroughs/static-site/js/modernizr.custom-3.6.0.js?1601919098"></script>
+    <script src="/walkthroughs/static-site/js/learn.js?1601919098"></script>
+    <script src="/walkthroughs/static-site/js/hugo-learn.js?1601919098"></script>
+    
+        
+            <script src="/walkthroughs/static-site/mermaid/mermaid.js?1601919098"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
