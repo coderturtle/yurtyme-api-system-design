@@ -1,10 +1,10 @@
 ---
-title: Architecture Overview
+title: Overview
 weight: 5
 pre: '<b>1. </b>'
 chapter: true
 ---
 
-If you have a website, application, or another web resource, you probably have static content. Static content includes files like images, videos, or music, or even scripts like .css or js. In the pre-cloud era, you would put those files on a standard server, and then serve them on the internet to all of your viewers, across the globe, from one specific geo location. But with cloud services, there’s a solution that provides faster delivery and better scalability.
+So how is yurtyme going to save our users time?
 
-To store, secure, and deliver static content at scale with AWS we will use [S3](https://aws.amazon.com/s3/) and [CloudFront](https://aws.amazon.com/cloudfront/)
+Our mission in 2014 was to use developing, state-of-the-art technology (smartphone inter-connectability, GPS, algorithmized big data, and the network effect), to create an application that combines historical and real-time information to provide accurate predictive data so a customer can minimize the time he/she spends waiting. Using the Waze application as our innovative inspiration, we believe we can develop our own use of social networking applications: to use real-time inputs from consumers and members to give fellow members information. The value of the “network effect” resonated in our group and we believe the use of its information sharing could be very influential on our business plan.

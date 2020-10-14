@@ -3,85 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/overview/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/2020/overview/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/console/create-domain/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/overview/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/overview/s3/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/overview/requirements/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/infra-as-code/overview/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/2020/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/overview/cloudfront/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/2020/aws-design/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/console/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/2020/pwa/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/console/get-cert/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/2020/back-end/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/infra-as-code/details/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/2020/analytics/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/infra-as-code/</loc>
-    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/categories/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/console/create-bucket/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/credits/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/infra-as-code/deploy/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/tags/</loc>
   </url>
   
   <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/overview/security/</loc>
-  </url>
-  
-  <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/overview/all-together/</loc>
-  </url>
-  
-  <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/console/setup-cloudfront/</loc>
-  </url>
-  
-  <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/console/update-bucket-policy/</loc>
-  </url>
-  
-  <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/console/update-dns/</loc>
-  </url>
-  
-  <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/</loc>
-    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/credits/</loc>
-  </url>
-  
-  <url>
-    <loc>https://gremlins.io/walkthroughs/static-site/tags/</loc>
+    <loc>https://coderturtle.github.io/yurtyme-api-system-design/</loc>
   </url>
   
 </urlset>

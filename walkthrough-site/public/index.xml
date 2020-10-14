@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Static Site on AWS</title>
-    <link>https://gremlins.io/walkthroughs/static-site/</link>
-    <description>Recent content on Static Site on AWS</description>
+    <title>Yurtyme on Yurtyme System Design 2020</title>
+    <link>https://coderturtle.github.io/yurtyme-api-system-design/</link>
+    <description>Recent content in Yurtyme on Yurtyme System Design 2020</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <lastBuildDate>Sat, 09 Apr 2016 16:50:16 +0200</lastBuildDate><atom:link href="https://gremlins.io/walkthroughs/static-site/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-US</language><atom:link href="https://coderturtle.github.io/yurtyme-api-system-design/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Credits</title>
-      <link>https://gremlins.io/walkthroughs/static-site/credits/</link>
+      <link>https://coderturtle.github.io/yurtyme-api-system-design/credits/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://gremlins.io/walkthroughs/static-site/credits/</guid>
+      <guid>https://coderturtle.github.io/yurtyme-api-system-design/credits/</guid>
       <description>This site is built on top of the Hugo Learn Theme.
 Contributors Thanks to them for making Open Source Software a better place !
 And a special thanks to @vjeantet for his work on docdock, a fork of hugo-theme-learn. v2.0.0 of this theme is inspired by his work.

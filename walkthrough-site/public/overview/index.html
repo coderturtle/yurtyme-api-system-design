@@ -4,29 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Hugo 0.75.1" />
-    <meta name="description" content="Dynamic architecture walkthrough of hosting a static site on AWS">
+    <meta name="description" content="Yurtyme System Design 2020">
 <meta name="author" content="Derm Duncan">
 
-    <link rel="icon" href="/walkthroughs/static-site/images/favicon.png" type="image/png">
+    <link rel="icon" href="/yurtyme-api-system-design/images/favicon.png" type="image/png">
 
-    <title>Architecture Overview :: Static Site on AWS</title>
+    <title>Overview :: Yurtyme System Design 2020</title>
 
     
-    <link href="/walkthroughs/static-site/css/nucleus.css?1601919098" rel="stylesheet">
-    <link href="/walkthroughs/static-site/css/fontawesome-all.min.css?1601919098" rel="stylesheet">
-    <link href="/walkthroughs/static-site/css/hybrid.css?1601919098" rel="stylesheet">
-    <link href="/walkthroughs/static-site/css/featherlight.min.css?1601919098" rel="stylesheet">
-    <link href="/walkthroughs/static-site/css/perfect-scrollbar.min.css?1601919098" rel="stylesheet">
-    <link href="/walkthroughs/static-site/css/auto-complete.css?1601919098" rel="stylesheet">
-    <link href="/walkthroughs/static-site/css/atom-one-dark-reasonable.css?1601919098" rel="stylesheet">
-    <link href="/walkthroughs/static-site/css/theme.css?1601919098" rel="stylesheet">
-    <link href="/walkthroughs/static-site/css/hugo-theme.css?1601919098" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/nucleus.css?1602664545" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/fontawesome-all.min.css?1602664545" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/hybrid.css?1602664545" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/featherlight.min.css?1602664545" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/perfect-scrollbar.min.css?1602664545" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/auto-complete.css?1602664545" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/atom-one-dark-reasonable.css?1602664545" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/theme.css?1602664545" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/hugo-theme.css?1602664545" rel="stylesheet">
     
-    <link href="/walkthroughs/static-site/css/theme-blue.css?1601919098" rel="stylesheet">
+    <link href="/yurtyme-api-system-design/css/theme-red.css?1602664545" rel="stylesheet">
     
     
 
-    <script src="/walkthroughs/static-site/js/jquery-3.3.1.min.js?1601919098"></script>
+    <script src="/yurtyme-api-system-design/js/jquery-3.3.1.min.js?1602664545"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -36,7 +36,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/walkthroughs/static-site/overview/">
+  <body class="" data-url="/yurtyme-api-system-design/overview/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -44,7 +44,7 @@
   <div id="header-wrapper">
     <div id="header">
       <a id="logo" href="/">
-  <img src="images/cloud-gremlin-blue.png" />
+  <img src="images/yurtyme.png" />
 </a>
 
     </div>
@@ -55,14 +55,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/walkthroughs/static-site/js/lunr.min.js?1601919098"></script>
-<script type="text/javascript" src="/walkthroughs/static-site/js/auto-complete.js?1601919098"></script>
+<script type="text/javascript" src="/yurtyme-api-system-design/js/lunr.min.js?1602664545"></script>
+<script type="text/javascript" src="/yurtyme-api-system-design/js/auto-complete.js?1602664545"></script>
 <script type="text/javascript">
     
-        var baseurl = "https:\/\/gremlins.io\/walkthroughs\/static-site";
+        var baseurl = "https:\/\/coderturtle.github.io\/yurtyme-api-system-design";
     
 </script>
-<script type="text/javascript" src="/walkthroughs/static-site/js/search.js?1601919098"></script>
+<script type="text/javascript" src="/yurtyme-api-system-design/js/search.js?1602664545"></script>
 
     
   </div>
@@ -80,13 +80,13 @@
  
   
     
-    <li data-nav-id="/walkthroughs/static-site/overview/" title="Architecture Overview" class="dd-item 
+    <li data-nav-id="/yurtyme-api-system-design/overview/" title="Overview" class="dd-item 
         parent
         active
         
         ">
-      <a href="/walkthroughs/static-site/overview/">
-          <b>1. </b>Architecture Overview
+      <a href="/yurtyme-api-system-design/overview/">
+          <b>1. </b>Overview
           
             <i class="fas fa-check read-icon"></i>
           
@@ -111,97 +111,13 @@
  
   
     
-    <li data-nav-id="/walkthroughs/static-site/overview/s3/" title="S3" class="dd-item 
+    <li data-nav-id="/yurtyme-api-system-design/overview/requirements/" title="Requirements" class="dd-item 
         
         
         
         ">
-      <a href="/walkthroughs/static-site/overview/s3/">
-          <b>a. </b>S3
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/walkthroughs/static-site/overview/cloudfront/" title="Cloudfront" class="dd-item 
-        
-        
-        
-        ">
-      <a href="/walkthroughs/static-site/overview/cloudfront/">
-          <b>b. </b>Cloudfront
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/walkthroughs/static-site/overview/security/" title="Security" class="dd-item 
-        
-        
-        
-        ">
-      <a href="/walkthroughs/static-site/overview/security/">
-          <b>c. </b>Security
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/walkthroughs/static-site/overview/all-together/" title="Putting it all together" class="dd-item 
-        
-        
-        
-        ">
-      <a href="/walkthroughs/static-site/overview/all-together/">
-          <b>d. </b>Putting it all together
+      <a href="/yurtyme-api-system-design/overview/requirements/">
+          <b>a. </b>Requirements
           
             <i class="fas fa-check read-icon"></i>
           
@@ -230,13 +146,13 @@
  
   
     
-    <li data-nav-id="/walkthroughs/static-site/console/" title="Create in the Console" class="dd-item 
+    <li data-nav-id="/yurtyme-api-system-design/2020/" title="2020 System Design Prototype" class="dd-item 
         
         
         
         ">
-      <a href="/walkthroughs/static-site/console/">
-          <b>2. </b>Create in the Console
+      <a href="/yurtyme-api-system-design/2020/">
+          <b>2. </b>2020 System Design Prototype
           
             <i class="fas fa-check read-icon"></i>
           
@@ -261,13 +177,13 @@
  
   
     
-    <li data-nav-id="/walkthroughs/static-site/console/create-domain/" title="Create a Domain" class="dd-item 
+    <li data-nav-id="/yurtyme-api-system-design/2020/overview/" title="High Level Solution" class="dd-item 
         
         
         
         ">
-      <a href="/walkthroughs/static-site/console/create-domain/">
-          <b>a. </b>Create a Domain
+      <a href="/yurtyme-api-system-design/2020/overview/">
+          <b>a. </b>High Level Solution
           
             <i class="fas fa-check read-icon"></i>
           
@@ -289,13 +205,13 @@
  
   
     
-    <li data-nav-id="/walkthroughs/static-site/console/get-cert/" title="Get SSL Cert" class="dd-item 
+    <li data-nav-id="/yurtyme-api-system-design/2020/aws-design/" title="Potential AWS Implementation" class="dd-item 
         
         
         
         ">
-      <a href="/walkthroughs/static-site/console/get-cert/">
-          <b>b. </b>Get SSL Cert
+      <a href="/yurtyme-api-system-design/2020/aws-design/">
+          <b>b. </b>Potential AWS Implementation
           
             <i class="fas fa-check read-icon"></i>
           
@@ -317,13 +233,13 @@
  
   
     
-    <li data-nav-id="/walkthroughs/static-site/console/create-bucket/" title="Create Bucket" class="dd-item 
+    <li data-nav-id="/yurtyme-api-system-design/2020/pwa/" title="PWA Front-end" class="dd-item 
         
         
         
         ">
-      <a href="/walkthroughs/static-site/console/create-bucket/">
-          <b>c. </b>Create Bucket
+      <a href="/yurtyme-api-system-design/2020/pwa/">
+          <b>c. </b>PWA Front-end
           
             <i class="fas fa-check read-icon"></i>
           
@@ -345,13 +261,13 @@
  
   
     
-    <li data-nav-id="/walkthroughs/static-site/console/setup-cloudfront/" title="Setup CF Distribution" class="dd-item 
+    <li data-nav-id="/yurtyme-api-system-design/2020/back-end/" title="Back End Design" class="dd-item 
         
         
         
         ">
-      <a href="/walkthroughs/static-site/console/setup-cloudfront/">
-          <b>d. </b>Setup CF Distribution
+      <a href="/yurtyme-api-system-design/2020/back-end/">
+          <b>d. </b>Back End Design
           
             <i class="fas fa-check read-icon"></i>
           
@@ -373,163 +289,13 @@
  
   
     
-    <li data-nav-id="/walkthroughs/static-site/console/update-bucket-policy/" title="Update Bucket Policy" class="dd-item 
+    <li data-nav-id="/yurtyme-api-system-design/2020/analytics/" title="Data Analytics" class="dd-item 
         
         
         
         ">
-      <a href="/walkthroughs/static-site/console/update-bucket-policy/">
-          <b>e. </b>Update Bucket Policy
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/walkthroughs/static-site/console/update-dns/" title="Update DNS entries" class="dd-item 
-        
-        
-        
-        ">
-      <a href="/walkthroughs/static-site/console/update-dns/">
-          <b>f. </b>Update DNS entries
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-        
-        </ul>
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/walkthroughs/static-site/infra-as-code/" title="Infrastructure as Code" class="dd-item 
-        
-        
-        
-        ">
-      <a href="/walkthroughs/static-site/infra-as-code/">
-          <b>3. </b>Infrastructure as Code
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-      
-        <ul>
-          
-          
-            
-          
-          
-          
-        
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/walkthroughs/static-site/infra-as-code/overview/" title="Solution Overview" class="dd-item 
-        
-        
-        
-        ">
-      <a href="/walkthroughs/static-site/infra-as-code/overview/">
-          <b>a. </b>Solution Overview
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/walkthroughs/static-site/infra-as-code/details/" title="Solution Details" class="dd-item 
-        
-        
-        
-        ">
-      <a href="/walkthroughs/static-site/infra-as-code/details/">
-          <b>b. </b>Solution Details
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/walkthroughs/static-site/infra-as-code/deploy/" title="Deploy Stack" class="dd-item 
-        
-        
-        
-        ">
-      <a href="/walkthroughs/static-site/infra-as-code/deploy/">
-          <b>c. </b>Deploy Stack
+      <a href="/yurtyme-api-system-design/2020/analytics/">
+          <b>e. </b>Data Analytics
           
             <i class="fas fa-check read-icon"></i>
           
@@ -560,11 +326,11 @@
         <ul>
           
               <li> 
-                  <a class="padding" href="https://github.com/coderturtle/gremlindojo/static-site"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
+                  <a class="padding" href="https://github.com/coderturtle/yurtyme-api-system-design/"><i class='fab fa-fw fa-github'></i> GitHub repo</a>
               </li>
           
               <li> 
-                  <a class="padding" href="https://gremlins.io/cloud-gremlin/"><i class='fas fa-fw fa-camera'></i> Showcases</a>
+                  <a class="padding" href="https://coderturtle.github.io/yurtyme-api-system-design"><i class='fas fa-fw fa-camera'></i> Showcases</a>
               </li>
           
               <li> 
@@ -621,7 +387,7 @@
                   
                   
                   <div id="top-github-link">
-                    <a class="github-link" title='Edit this page' href="https://github.com/coderturtle/gremlindojooverview/_index.en.md" target="blank">
+                    <a class="github-link" title='Edit this page' href="https://github.com/coderturtle/yurtyme-api-system-design/walkthrough-siteoverview/_index.en.md" target="blank">
                       <i class="fas fa-code-branch"></i>
                       <span id="top-github-link-text">Edit this page</span>
                     </a>
@@ -646,7 +412,7 @@
             
           
           
-            <a href='/walkthroughs/static-site/'>Static Site on AWS</a> > Architecture Overview
+            <a href='/yurtyme-api-system-design/'>Yurtyme</a> > Overview
           
         
           
@@ -671,8 +437,8 @@
 
 
 
-	<p>If you have a website, application, or another web resource, you probably have static content. Static content includes files like images, videos, or music, or even scripts like .css or js. In the pre-cloud era, you would put those files on a standard server, and then serve them on the internet to all of your viewers, across the globe, from one specific geo location. But with cloud services, there’s a solution that provides faster delivery and better scalability.</p>
-<p>To store, secure, and deliver static content at scale with AWS we will use <a href="https://aws.amazon.com/s3/">S3</a> and <a href="https://aws.amazon.com/cloudfront/">CloudFront</a></p>
+	<p>So how is yurtyme going to save our users time?</p>
+<p>Our mission in 2014 was to use developing, state-of-the-art technology (smartphone inter-connectability, GPS, algorithmized big data, and the network effect), to create an application that combines historical and real-time information to provide accurate predictive data so a customer can minimize the time he/she spends waiting. Using the Waze application as our innovative inspiration, we believe we can develop our own use of social networking applications: to use real-time inputs from consumers and members to give fellow members information. The value of the “network effect” resonated in our group and we believe the use of its information sharing could be very influential on our business plan.</p>
 
 
 
@@ -745,54 +511,6 @@
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -842,88 +560,6 @@
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
                     
                         
             
@@ -985,10 +621,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/walkthroughs/static-site/" title="Static Site on AWS"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/yurtyme-api-system-design/" title="Yurtyme"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/walkthroughs/static-site/overview/s3/" title="S3" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/yurtyme-api-system-design/overview/requirements/" title="Requirements" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -998,19 +634,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/walkthroughs/static-site/js/clipboard.min.js?1601919098"></script>
-    <script src="/walkthroughs/static-site/js/perfect-scrollbar.min.js?1601919098"></script>
-    <script src="/walkthroughs/static-site/js/perfect-scrollbar.jquery.min.js?1601919098"></script>
-    <script src="/walkthroughs/static-site/js/jquery.sticky.js?1601919098"></script>
-    <script src="/walkthroughs/static-site/js/featherlight.min.js?1601919098"></script>
-    <script src="/walkthroughs/static-site/js/highlight.pack.js?1601919098"></script>
+    <script src="/yurtyme-api-system-design/js/clipboard.min.js?1602664545"></script>
+    <script src="/yurtyme-api-system-design/js/perfect-scrollbar.min.js?1602664545"></script>
+    <script src="/yurtyme-api-system-design/js/perfect-scrollbar.jquery.min.js?1602664545"></script>
+    <script src="/yurtyme-api-system-design/js/jquery.sticky.js?1602664545"></script>
+    <script src="/yurtyme-api-system-design/js/featherlight.min.js?1602664545"></script>
+    <script src="/yurtyme-api-system-design/js/highlight.pack.js?1602664545"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/walkthroughs/static-site/js/modernizr.custom-3.6.0.js?1601919098"></script>
-    <script src="/walkthroughs/static-site/js/learn.js?1601919098"></script>
-    <script src="/walkthroughs/static-site/js/hugo-learn.js?1601919098"></script>
+    <script src="/yurtyme-api-system-design/js/modernizr.custom-3.6.0.js?1602664545"></script>
+    <script src="/yurtyme-api-system-design/js/learn.js?1602664545"></script>
+    <script src="/yurtyme-api-system-design/js/hugo-learn.js?1602664545"></script>
     
         
-            <script src="/walkthroughs/static-site/mermaid/mermaid.js?1601919098"></script>
+            <script src="/yurtyme-api-system-design/mermaid/mermaid.js?1602664545"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
