@@ -43,7 +43,7 @@ We use a similar flow for all our API requests. A Request goes to an App Server,
 
 #### How is the do users know which bars have queue availability as they move around
 
-We need to periodically ping the User's location for all active bars (drivers not in the QUEUE_FULL state). This can be part of the mobile application. The app can periodically call an HTTP handler with the users's current location. This location is simply written to the In-Memory DB by App Servers. The location is also sent to the Queing System.
+We need to periodically ping the User's location for all active bars (users not in the QUEUE_FULL state). This can be part of the mobile application. The app can periodically call an HTTP handler with the users's current location. This location is simply written to the In-Memory DB by App Servers. The location is also sent to the Queing System.
 
 The Queing System needs to keep the User's location updated. The Queing System finds bars near a user. It will store each active users's location in a Spatial Index for such queries. Bars locations are stationary.
 
